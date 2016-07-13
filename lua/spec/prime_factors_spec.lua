@@ -22,6 +22,23 @@ describe('Prime factors', function()
     assert.are.same({ 2, 2 }, prime_factors.compute_factors_for(4))
   end)
 
-  --@7:52
-  it('five', function() assert.is_true(false) end)
+  it('five has only itself as a prime factor', function()
+    assert.are.same({ 5 }, prime_factors.compute_factors_for(5))
+  end)
+
+  it('six has 2 and 3 as prime factors', function()
+    assert.are.same({ 2, 3}, prime_factors.compute_factors_for(6))
+  end)
+
+  it('eight has 3 times 2 as prime factors', function()
+    assert.are.same({ 2, 2, 2 }, prime_factors.compute_factors_for(8))
+  end)
+
+  it('9 has 2 times 3 as prime factors', function()
+    assert.are.same({ 3, 3 }, prime_factors.compute_factors_for(9))
+  end)
+
+  it('10 has 2 and 5 as prime factors', function()
+    assert.are.same({ 2, 5 }, prime_factors.compute_factors_for(10))
+  end)
 end)

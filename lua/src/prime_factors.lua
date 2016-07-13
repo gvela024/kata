@@ -1,21 +1,20 @@
 --[[
-Results for the prime factors class
+Computes all the prime factors in a number
 --]]
 
 function compute_factors_for(number)
-  if number > 1 then
-    factors = {}
-    if number % 2 == 0 then
-      table.insert(factors, 2)
-      number = number / 2;
+  local candidate = 2
+  local factors = {}
+
+  while number > 1 do
+    while number % candidate == 0 do
+      table.insert(factors, candidate)
+      number = number / candidate;
     end
-    if number > 1 then
-      table.insert(factors,number)
-    end
-    return factors
+    candidate = candidate + 1
   end
 
-  return {}
+  return factors
 end
 
 return {
