@@ -1,3 +1,7 @@
+--[[
+Simple fizz buzz implementation
+--]]
+
 return function(number)
   local result = number
 
