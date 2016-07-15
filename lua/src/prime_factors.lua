@@ -2,6 +2,9 @@
 Computes all the prime factors in a number
 --]]
 
+-- todo I think this could probably be recursive
+-- todo could probably use memoization as well
+
 function compute_factors_for(number)
   local candidate = 2
   local factors = {}
