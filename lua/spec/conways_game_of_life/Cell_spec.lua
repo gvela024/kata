@@ -9,9 +9,13 @@ describe('cell', function()
   end)
 
   it('should die with only one neighbor', function()
-    -- local cell = Cell()
-    --
-    -- local actual = cell.get_next_state()
-    -- assert.
+    local cell = Cell()
+
+    local actual = cell.get_next_state(cell, 1)
+    assert.are.equal(life_state.dead, actual)
+  end)
+
+  it('should die with zero neighbors', function()
+    --todo
   end)
 end)
