@@ -5,6 +5,7 @@ describe('cell', function()
   it('should be alive on initialization', function()
     local cell = Cell(life_state.alive);
 
+    -- Gotta figure out how to do private variables in here...
     assert.are.equal(life_state.alive, cell.life_state)
   end)
 
