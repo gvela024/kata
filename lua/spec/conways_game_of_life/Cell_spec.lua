@@ -18,126 +18,144 @@ describe('cell', function()
   it('should die with zero neighbors', function()
     local cell = Cell(life_state.alive)
 
-    local actual = cell:get_next_state_when_number_of_neighbors_is(0)
+    cell:update(0);
+    local actual = cell:get_state()
     assert.are.equal(life_state.dead, actual)
   end)
 
   it('should die with only one neighbor', function()
     local cell = Cell(life_state.alive)
 
-    local actual = cell:get_next_state_when_number_of_neighbors_is(1)
+    cell:update(1);
+    local actual = cell:get_state()
     assert.are.equal(life_state.dead, actual)
   end)
 
   it('should survive if the cell has two neighbors', function()
     local cell = Cell(life_state.alive)
 
-    local actual = cell:get_next_state_when_number_of_neighbors_is(2)
+    cell:update(2);
+    local actual = cell:get_state()
     assert.are.equal(life_state.alive, actual)
   end)
 
   it('should survive if the cell has three neighbors', function()
     local cell = Cell(life_state.alive)
 
-    local actual = cell:get_next_state_when_number_of_neighbors_is(3)
+    cell:update(3);
+    local actual = cell:get_state()
     assert.are.equal(life_state.alive, actual)
   end)
 
   it('should die with four neighbors', function()
     local cell = Cell(life_state.alive)
 
-    local actual = cell:get_next_state_when_number_of_neighbors_is(4)
+    cell:update(4);
+    local actual = cell:get_state()
     assert.are.equal(life_state.dead, actual)
   end)
 
   it('should die with five neighbors', function()
     local cell = Cell(life_state.alive)
 
-    local actual = cell:get_next_state_when_number_of_neighbors_is(5)
+    cell:update(5);
+    local actual = cell:get_state()
     assert.are.equal(life_state.dead, actual)
   end)
 
   it('should die with six neighbors', function()
     local cell = Cell(life_state.alive)
 
-    local actual = cell:get_next_state_when_number_of_neighbors_is(6)
+    cell:update(6);
+    local actual = cell:get_state()
     assert.are.equal(life_state.dead, actual)
   end)
 
   it('should die with seven neighbors', function()
     local cell = Cell(life_state.alive)
 
-    local actual = cell:get_next_state_when_number_of_neighbors_is(7)
+    cell:update(7);
+    local actual = cell:get_state()
     assert.are.equal(life_state.dead, actual)
   end)
 
   it('should die with eight neighbors', function()
     local cell = Cell(life_state.alive)
 
-    local actual = cell:get_next_state_when_number_of_neighbors_is(8)
+    cell:update(8);
+    local actual = cell:get_state(8)
     assert.are.equal(life_state.dead, actual)
   end)
 
   it('should stay dead with zero neighbors', function()
     local cell = Cell(life_state.dead)
 
-    local actual = cell:get_next_state_when_number_of_neighbors_is(0)
+    cell:update(0)
+    local actual = cell:get_state()
     assert.are.equal(life_state.dead, actual)
   end)
 
   it('should stay dead with one neighbors', function()
     local cell = Cell(life_state.dead)
 
-    local actual = cell:get_next_state_when_number_of_neighbors_is(1)
+    cell:update(1);
+    local actual = cell:get_state()
     assert.are.equal(life_state.dead, actual)
   end)
 
   it('should stay dead with two neighbors', function()
     local cell = Cell(life_state.dead)
 
-    local actual = cell:get_next_state_when_number_of_neighbors_is(2)
+    cell:update(2);
+    local actual = cell:get_state()
     assert.are.equal(life_state.dead, actual)
   end)
 
   it('should become alive with three neighbors', function()
     local cell = Cell(life_state.dead)
 
-    local actual = cell:get_next_state_when_number_of_neighbors_is(3)
+    cell:update(3);
+    local actual = cell:get_state()
     assert.are.equal(life_state.alive, actual)
   end)
 
   it('should stay dead with four neighbors', function()
     local cell = Cell(life_state.dead)
 
-    local actual = cell:get_next_state_when_number_of_neighbors_is(4)
+    cell:update(4);
+    local actual = cell:get_state()
     assert.are.equal(life_state.dead, actual)
   end)
 
   it('should stay dead with five neighbors', function()
     local cell = Cell(life_state.dead)
 
-    local actual = cell:get_next_state_when_number_of_neighbors_is(5)
+    cell:update(5);
+    local actual = cell:get_state()
     assert.are.equal(life_state.dead, actual)
   end)
 
   it('should stay dead with six neighbors', function()
     local cell = Cell(life_state.dead)
 
-    local actual = cell:get_next_state_when_number_of_neighbors_is(6)
+    cell:update(6);
+    local actual = cell:get_state()
     assert.are.equal(life_state.dead, actual)
   end)
 
   it('should stay dead with seven neighbors', function()
     local cell = Cell(life_state.dead)
 
-    local actual = cell:get_next_state_when_number_of_neighbors_is(7)
+    cell:update(7);
+    local actual = cell:get_state()
     assert.are.equal(life_state.dead, actual)
   end)
 
   it('should stay dead with eight neighbors', function()
     local cell = Cell(life_state.dead)
 
-    local actual = cell:get_next_state_when_number_of_neighbors_is(8)
+    cell:update(8);
+    local actual = cell:get_state()
     assert.are.equal(life_state.dead, actual)
   end)
 end)

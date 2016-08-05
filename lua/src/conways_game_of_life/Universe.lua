@@ -10,12 +10,21 @@ local function get_state(instance)
   for _, row in ipairs(instance.grid) do
     local _row = {}
     for _, cell in ipairs(row) do
-      table.insert(_row, cell.life_state)
+      table.insert(_row, cell:get_state())
     end
     table.insert(grid_state, _row)
   end
 
   return grid_state
+end
+
+local function update(instance)
+  for _, row in ipairs(instance.grid) do
+    local _row = {}
+    for _, cell in ipairs(row) do
+      cell:update(0)
+    end
+  end
 end
 
 return function(_grid)
@@ -31,6 +40,7 @@ return function(_grid)
 
   return {
     get_state = get_state,
-    grid = grid
+    grid = grid,
+    update = update
   }
 end
