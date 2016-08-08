@@ -24,4 +24,21 @@ describe('universe', function()
     local actual = universe:get_state()
     assert.are.same({ { O } }, actual)
   end)
+
+  it('should update all cells', function()
+    local universe = Universe({
+      { O, X, X },
+      { X, O, X },
+      { O, O, X },
+    })
+
+    local expected = {
+      { O, X, X },
+      { O, O, X },
+      { O, X, O }
+    }
+    universe:update()
+    local actual = universe:get_state()
+    assert.are.same(expected, actual)
+  end)
 end)
