@@ -1,6 +1,12 @@
 local Cell = require 'src/conways_game_of_life/Cell'
 local life_state = require 'src/conways_game_of_life/life_state_enum'
 
+local function table_length(t)
+  local count = 0
+  for _ in pairs(t) do count = count + 1 end
+  return count
+end
+
 local function get_state(instance)
   local grid_state = {}
 
@@ -21,36 +27,37 @@ end
 local function get_number_of_alive_neighbors(instance, row, col)
   local number_of_alive_neighbors = 0
 
-  if row > 0 then
+  if row > 1 then
     local row_above = row - 1
-    if col > 0 then
+    if col > 1 then
       local col_left = col - 1
-      print('pretty sure it is failing miserably at this next condition')
-      if instance.grid[row_above][col_left].get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
+      if instance.grid[row_above][col_left]:get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
     end
-    if instance.grid[row_above][col].get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
+    if instance.grid[row_above][col]:get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
     if col < #instance.grid[row_above] - 1 then
-      if instance.grid[row_above][col + 1].get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
+      if instance.grid[row_above][col + 1]:get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
     end
   end
 
-  if col > 0 then
+  if col > 1 then
     local col_left = col - 1
-    if instance.grid[row][col_left].get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
-  end
-  if col < #instance.grid[row] - 1 then
-    if instance.grid[row][col + 1].get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
+    if instance.grid[row][col_left]:get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
   end
 
-  if row > #instance.grid - 1 then
+  if col < table_length(instance.grid[row]) - 1 then
+    if instance.grid[row][col + 1]:get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
+  end
+
+
+  if row < table_length(instance.grid) - 1 then
     local row_below = row + 1
-    if col > 0 then
+    if col > 1 then
       local col_left = col - 1
-      if instance.grid[row_below][col_left].get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
+      if instance.grid[row_below][col_left]:get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
     end
-    if instance.grid[row_below][col].get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
+    if instance.grid[row_below][col]:get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
     if col < #instance.grid[row_below] - 1 then
-      if instance.grid[row_below][col + 1].get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
+      if instance.grid[row_below][col + 1]:get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
     end
   end
 end
