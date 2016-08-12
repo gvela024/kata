@@ -17,13 +17,13 @@ describe('universe', function()
     assert.are.same(expected, actual)
   end)
 
-  -- it('should update one cell', function()
-  --   local universe = Universe({ { X } })
-  --
-  --   universe:update()
-  --   local actual = universe:get_state()
-  --   assert.are.same({ { O } }, actual)
-  -- end)
+  it('should update one cell to dead since it has no neighbors', function()
+    local universe = Universe({ { X } })
+
+    universe:update()
+    local actual = universe:get_state()
+    assert.are.same({ { O } }, actual)
+  end)
 
   it('should update all cells', function()
     local universe = Universe({

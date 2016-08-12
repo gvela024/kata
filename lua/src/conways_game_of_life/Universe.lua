@@ -25,41 +25,53 @@ local function get_state(instance)
 end
 
 local function get_number_of_alive_neighbors(instance, row, col)
-  local number_of_alive_neighbors = 0
+  local alive_neighbors = 0
 
-  if row > 1 then
-    local row_above = row - 1
-    if col > 1 then
-      local col_left = col - 1
-      if instance.grid[row_above][col_left]:get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
-    end
-    if instance.grid[row_above][col]:get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
-    if col < #instance.grid[row_above] - 1 then
-      if instance.grid[row_above][col + 1]:get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
-    end
+  print(row, col)
+
+  -- NW
+  if row > 1  and col > 1 then
+    print('NW')
+    -- if instance.grid[row - 1][col - 1].get_sate() == life_state.alive then alive_neighbors = alive_neighbors + 1 end
   end
 
+  -- W
   if col > 1 then
-    local col_left = col - 1
-    if instance.grid[row][col_left]:get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
+    print('W')
+    -- if instance.grid[row][col - 1].get_sate() == life_state.alive then alive_neighbors = alive_neighbors + 1 end
   end
 
-  if col < table_length(instance.grid[row]) - 1 then
-    if instance.grid[row][col + 1]:get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
+  -- SW
+  if row < table_length(instance.grid) and col > 1 then
+    print('SW')
   end
 
-
-  if row < table_length(instance.grid) - 1 then
-    local row_below = row + 1
-    if col > 1 then
-      local col_left = col - 1
-      if instance.grid[row_below][col_left]:get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
-    end
-    if instance.grid[row_below][col]:get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
-    if col < #instance.grid[row_below] - 1 then
-      if instance.grid[row_below][col + 1]:get_state() == life_state.alive then number_of_alive_neighbors = number_of_alive_neighbors + 1 end
-    end
+  -- S
+  if row < table_length(instance.grid) then
+    print('S')
   end
+
+  -- SE
+  if row < table_length(instance.grid) and col < table_length(instance.grid[row]) then
+    print('SE')
+  end
+
+  -- E
+  if col < table_length(instance.grid[row]) then
+    print('E')
+  end
+
+  -- NE
+  if row > 1 and col < table_length(instance.grid[row]) then
+    print('NE')
+  end
+
+  -- N
+  if row > 1 then
+    print('N')
+  end
+
+  return alive_neighbors
 end
 
 local function update(instance)
@@ -67,7 +79,7 @@ local function update(instance)
     local _row = {}
     for column_index, cell in ipairs(row) do
       local number_of_alive_neighbors = get_number_of_alive_neighbors(instance, row_index, column_index)
-      cell:update(0)
+      cell:update(number_of_alive_neighbors)
     end
   end
 end
