@@ -8,24 +8,21 @@ local function table_length(t)
 end
 
 local function get_number_of_live_neighbors_in_col(state, row, col)
-  local live_neighbors = 0
-
-  if col > 1 then
-    live_neighbors = live_neighbors + state[row][col - 1]
+  if col >= 1 and col <= table_length(state[row]) then
+    return state[row][col]
   end
 
-  if col < table_length(state[row]) then
-    live_neighbors = live_neighbors + state[row][col + 1]
-  end
-
-  return live_neighbors
+  return 0
 end
 
 local function get_number_of_live_neighbors_in_row(state, row, col)
   local live_neighbors = 0
 
-  live_neighbors = live_neighbors + state[row][col]
-  live_neighbors = live_neighbors + get_number_of_live_neighbors_in_col(state, row, col)
+  if row >= 1 and row <= table_length(state) then
+    live_neighbors = live_neighbors + get_number_of_live_neighbors_in_col(state, row, col - 1)
+    live_neighbors = live_neighbors + state[row][col]
+    live_neighbors = live_neighbors + get_number_of_live_neighbors_in_col(state, row, col + 1)
+  end
 
   return live_neighbors
 end
@@ -33,17 +30,10 @@ end
 local function get_number_of_alive_neighbors(state, row, col)
   local live_neighbors = 0
 
-  if row > 1 then
-    local row_above = row - 1
-    live_neighbors = live_neighbors + get_number_of_live_neighbors_in_row(state, row_above, col)
-  end
-
-  if row < table_length(state) then
-    local row_below = row + 1
-    live_neighbors = live_neighbors + get_number_of_live_neighbors_in_row(state, row_below, col)
-  end
-
-  live_neighbors = live_neighbors + get_number_of_live_neighbors_in_col(state, row, col)
+  live_neighbors = live_neighbors + get_number_of_live_neighbors_in_row(state, row - 1, col)
+  live_neighbors = live_neighbors + get_number_of_live_neighbors_in_row(state, row + 1, col)
+  live_neighbors = live_neighbors + get_number_of_live_neighbors_in_col(state, row, col - 1)
+  live_neighbors = live_neighbors + get_number_of_live_neighbors_in_col(state, row, col + 1)
 
   return live_neighbors
 end
