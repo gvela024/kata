@@ -5,6 +5,11 @@ local X = life_state.alive
 local O = life_state.dead
 
 describe('universe', function()
+  local function get_next_state(instance)
+    instance:update()
+    return instance:get_state()
+  end
+
   it('should store its initial state', function()
     local expected = {
       { X, O, X },
@@ -20,8 +25,7 @@ describe('universe', function()
   it('should update one cell to dead since it has no neighbors', function()
     local universe = Universe({ { X } })
 
-    universe:update()
-    local actual = universe:get_state()
+    local actual = get_next_state(universe)
     assert.are.same({ { O } }, actual)
   end)
 
@@ -37,8 +41,23 @@ describe('universe', function()
       { O, O, X },
       { O, X, O }
     }
-    universe:update()
-    local actual = universe:get_state()
+    local actual = get_next_state(universe)
+    assert.are.same(expected, actual)
+  end)
+
+  it('should consider all sorrounding neighbors when updating', function()
+    local universe = Universe({
+      { X, X, X },
+      { X, X, X },
+      { X, X, X },
+    })
+
+    local expected = {
+      { X, O, X },
+      { O, O, O },
+      { X, O, X }
+    }
+    local actual = get_next_state(universe)
     assert.are.same(expected, actual)
   end)
 end)
