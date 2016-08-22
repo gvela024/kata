@@ -1,5 +1,11 @@
 # Kata's to learn
 
+## Design Patterns
+- Command
+- Flyweight
+- Observer
+- Prototype
+
 ## Algorithms
 ### Sorting Algorithms
 - Bubble Sort
