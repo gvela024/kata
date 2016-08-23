@@ -1,5 +1,5 @@
 local function run(instance)
-  if instance._private.game:is_running() then
+  while instance._private.game:is_running() do
     instance._private.game:update()
   end
 end
