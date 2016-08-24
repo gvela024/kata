@@ -29,21 +29,37 @@ local function get_number_of_updates(instance)
   return instance._private.number_of_updates
 end
 
+local function get_number_of_renders(instance)
+  return instance._private.number_of_renders
+end
+
+local function render(instance)
+  if instance._private.number_of_renders ~= instance._private.number_of_updates - 1 then
+    error('Calling render before update')
+  end
+  instance._private.number_of_renders = instance._private.number_of_renders + 1
+end
+
 return function()
   local updated = false
   local running_state = { false }
   local number_of_updates = 0
+  local number_of_renders = 0
 
   return {
-    set_running_state = set_running_state,
     update = update,
+    render = render,
+
+    set_running_state = set_running_state,
     is_running = is_running,
     is_updated = is_updated,
     get_number_of_updates = get_number_of_updates,
+    get_number_of_renders = get_number_of_renders,
     _private = {
       updated = updated,
       running_state = running_state,
-      number_of_updates = number_of_updates
+      number_of_updates = number_of_updates,
+      number_of_renders = number_of_renders
     }
   }
 end

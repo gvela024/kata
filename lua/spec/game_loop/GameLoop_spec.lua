@@ -23,11 +23,19 @@ describe('The game loop', function()
     assert.is_true(game_double:is_updated())
   end)
 
-  it('invokes update as long as game is running', function()
+  it('should invoke update as long as game is running', function()
     local game_loop = GameLoop(game_double)
     game_double:set_running_state({ true, true, true, false })
 
     game_loop:run()
     assert.are.equal(3, game_double:get_number_of_updates())
+  end)
+
+  it('should invoke render after update', function()
+    local game_loop = GameLoop(game_double)
+    game_double:set_running_state({ true })
+
+    game_loop:run()
+    assert.are.equal(1, game_double:get_number_of_renders())
   end)
 end)
