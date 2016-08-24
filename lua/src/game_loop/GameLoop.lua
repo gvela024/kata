@@ -5,11 +5,12 @@ local function run(instance)
   end
 end
 
-return function(game)
+return function(game, input_handler)
   return {
     run = run,
     _private = {
-      game = game
+      game = game,
+      input_handler = input_handler
     }
   }
 end

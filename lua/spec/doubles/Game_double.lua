@@ -12,7 +12,7 @@ local function set_running_state(instance, running_state)
   instance._private.running_state = reverse_elements(running_state)
 end
 
-local function update(instance)
+local function update(instance, input)
   instance._private.number_of_updates = instance._private.number_of_updates + 1
   instance._private.updated = true
 end
@@ -45,6 +45,7 @@ return function()
   local running_state = { false }
   local number_of_updates = 0
   local number_of_renders = 0
+  local update_with_input
 
   return {
     update = update,
