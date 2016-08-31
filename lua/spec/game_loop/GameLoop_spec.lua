@@ -10,7 +10,7 @@ describe('The game loop', function()
   before_each(function()
     game_double = Game_double()
     input_handler_double = InputHandler_double()
-    game_loop = GameLoop(game_double)
+    game_loop = GameLoop(game_double, input_handler_double)
   end)
 
   it('should do nothing if the game is not running', function()
@@ -41,10 +41,10 @@ describe('The game loop', function()
 
   it('should pass input to updated', function()
     local test_input = 'some input'
-    input_handler_double.setInput(test_input)
+    input_handler_double:set_input(test_input)
     game_double:set_running_state({ true })
 
     game_loop:run()
-    assert.are.equal(test_input, game_double.update_with_input)
+    assert.are.equal(test_input, game_double:get_input())
   end)
 end)
