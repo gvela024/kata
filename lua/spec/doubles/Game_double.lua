@@ -39,9 +39,6 @@ local function get_input(instance)
 end
 
 local function render(instance)
-  if instance._private.number_of_renders ~= instance._private.number_of_updates - 1 then
-    error('Calling render before update')
-  end
   instance._private.number_of_renders = instance._private.number_of_renders + 1
 end
 
