@@ -59,4 +59,17 @@ describe('The game loop', function()
     game_loop:run()
     assert.are.equal(test_input, game_double:get_input())
   end)
+
+  it('should skip update if loop is too fast', function()
+    local game_double = Game_double()
+    local input_handler_double = InputHandler_double()
+    local game_loop = GameLoop(game_double, input_handler_double)
+
+    game_double:set_running_state({ true })
+
+    game_loop:run()
+    assert.is_false(true) -- continue here, need to figure out framerate logic
+    assert.are.equal(0, game_double:get_number_of_updates())
+    assert.are.equal(1, game_double:get_number_of_renders())
+  end)
 end)
