@@ -1,18 +1,19 @@
-local GameLoop = require 'src/game_loop/GameLoop'
-local Game_double = require 'spec/doubles/Game_double'
-local InputHandler_double = require 'spec/doubles/InputHandler_double'
-local ElapsedTimeKeeper_double = require 'spec/doubles/ElapsedTimeKeeper_double'
+local GameLoop = require 'src/GameLoop/GameLoop'
+local Game_Dummy = require 'spec/doubles/Game_Dummy'
+local InputHandler_Dummy = require 'spec/doubles/InputHandler_Dummy'
+local ElapsedTimeKeeper_Dummy = require 'spec/doubles/ElapsedTimeKeeper_Dummy'
 local utils = require 'src/utils'
 
 describe('The game loop', function()
   local testFrameDuration = 1000 / 60
   local game_mock = {}
   local input_handler_mock = {}
+  local elapsed_time_keeper_mock = {}
 
   before_each(function()
-    game_mock = mock(Game_double(), true)
-    input_handler_mock = mock(InputHandler_double(), true)
-    elapsed_time_keeper_mock = mock(ElapsedTimeKeeper_double(), true)
+    game_mock = mock(Game_Dummy(), true)
+    input_handler_mock = mock(InputHandler_Dummy(), true)
+    elapsed_time_keeper_mock = mock(ElapsedTimeKeeper_Dummy(), true)
   end)
 
   local function set_running_states_to(states)
@@ -20,9 +21,6 @@ describe('The game loop', function()
     game_mock.is_running.on_call_with(game_mock).invokes(function()
       return table.remove(_states)
     end)
-  end
-
-  local function get_times(times)
   end
 
   local function set_elapsed_times_to(times)
@@ -44,6 +42,7 @@ describe('The game loop', function()
     game_mock.is_running.on_call_with(game_mock).returns(false)
     game_loop:run()
     assert.stub(game_mock.update).was_not.called()
+    assert.stub(game_mock.render).was_not.called()
   end)
 
   it('should invoke one update if game is running', function()
