@@ -1,4 +1,4 @@
-local life_state = require 'src/conways_game_of_life/life_state_enum'
+local life_state = require 'src/ConwaysGameOfLife/life_state_enum'
 
 local function update(instance, number_of_neighbors)
   if instance.life_state == life_state.alive then

@@ -1,5 +1,5 @@
-local Cell = require 'src/conways_game_of_life/Cell'
-local life_state = require 'src/conways_game_of_life/life_state_enum'
+local Cell = require 'src/ConwaysGameOfLife/Cell'
+local life_state = require 'src/ConwaysGameOfLife/life_state_enum'
 
 describe('cell', function()
   it('should be alive on initialization', function()

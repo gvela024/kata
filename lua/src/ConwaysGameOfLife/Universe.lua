@@ -1,5 +1,5 @@
-local Cell = require 'src/conways_game_of_life/Cell'
-local life_state = require 'src/conways_game_of_life/life_state_enum'
+local Cell = require 'src/ConwaysGameOfLife/Cell'
+local life_state = require 'src/ConwaysGameOfLife/life_state_enum'
 
 local function table_length(t)
   local count = 0
@@ -41,7 +41,7 @@ end
 local function update(instance)
   local state = instance:get_state()
 
-  for row_index, row in ipairs(instance.grid) do
+  for row_index, row in ipairs(instance._private.grid) do
     local _row = {}
     for column_index, cell in ipairs(row) do
       local number_of_alive_neighbors = get_number_of_alive_neighbors(state, row_index, column_index)
@@ -53,7 +53,7 @@ end
 local function get_state(instance)
   local grid_state = {}
 
-  for _, row in ipairs(instance.grid) do
+  for _, row in ipairs(instance._private.grid) do
     local _row = {}
     for _, cell in ipairs(row) do
       table.insert(_row, cell:get_state())
@@ -77,7 +77,10 @@ return function(_grid)
 
   return {
     get_state = get_state,
-    grid = grid,
-    update = update
+    update = update,
+    
+    _private = {
+      grid = grid,
+    }
   }
 end

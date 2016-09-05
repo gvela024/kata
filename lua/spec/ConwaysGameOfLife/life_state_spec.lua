@@ -1,4 +1,4 @@
-local life_state = require 'src/conways_game_of_life/life_state_enum'
+local life_state = require 'src/ConwaysGameOfLife/life_state_enum'
 
 describe('life state', function()
   it('alive should equal 1 and dead should equal 0', function()
