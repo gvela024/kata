@@ -107,4 +107,16 @@ describe('The game loop', function()
     assert.stub(game_mock.update).was.called(2)
     assert.stub(game_mock.render).was.called(1)
   end)
+
+  it('should execute update eventually', function()
+    local game_loop = GameLoop(game_mock, input_handler_mock, elapsed_time_keeper_mock)
+
+    local halfFrameDuration = testFrameDuration * 0.5
+    set_elapsed_times_to({ 0, halfFrameDuration, halfFrameDuration * 2, halfFrameDuration * 3 })
+    set_running_states_to({ true, true, true, false })
+
+    game_loop:run()
+    assert.stub(game_mock.update).was.called(1)
+    -- assert.stub(game_mock.render).was.called(1)
+  end)
 end)

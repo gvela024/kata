@@ -2,10 +2,11 @@ local frameDuration = 1000 / 60
 
 local function run(instance)
   local previous_time = instance._private.elapsed_time_keeper:get_current_time()
+  local lag = 0
 
   while instance._private.game:is_running() do
     local current_time = instance._private.elapsed_time_keeper:get_current_time()
-    local lag = current_time - previous_time
+    lag = lag + current_time - previous_time
 
     while math.floor(lag) >= math.floor(frameDuration) do
       instance._private.game:update(instance._private.input_handler:get_current_input())
