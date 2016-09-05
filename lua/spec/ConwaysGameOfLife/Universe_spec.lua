@@ -1,5 +1,4 @@
 local Universe = require 'src/ConwaysGameOfLife/Universe'
-
 local life_state = require 'src/ConwaysGameOfLife/life_state_enum'
 local X = life_state.alive
 local O = life_state.dead
