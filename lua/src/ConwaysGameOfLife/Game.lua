@@ -3,7 +3,17 @@ local function update(instance)
 end
 
 local function render(instance)
-  instance._private.universe:get_state()
+  local universe = instance._private.universe:get_state()
+  local roof = ''
+  local floor = ''
+  
+  for k, v in pairs(universe) do
+    print(k, v)
+    for j, k in pairs(v) do
+      print(j, k)
+    end
+  end
+
   instance._private.output.print(
     '*~*\n' ..
     '|O|\n' ..
