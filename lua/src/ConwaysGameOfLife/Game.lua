@@ -1,23 +1,39 @@
+local life_state = require 'src/ConwaysGameOfLife/life_state_enum'
+
+local pillar = '*'
+local left_or_right_wall = '|'
+local top_or_bottom_wall = '~'
+
 local function update(instance)
   instance._private.universe:update()
 end
 
 local function render(instance)
   local universe = instance._private.universe:get_state()
-  local roof = ''
-  local floor = ''
-  
-  for k, v in pairs(universe) do
-    print(k, v)
-    for j, k in pairs(v) do
-      print(j, k)
+  local top_or_bottom_boundary = ''
+  local cells = ''
+
+  for _, cell_row in ipairs(universe) do
+    for _, cell_life_state in ipairs(cell_row) do
+      cells = cells .. left_or_right_wall
+      if cell_life_state == life_state.alive then
+        cells = cells .. 'X'
+      else
+        cells = cells .. 'O'
+      end
     end
+    cells = cells .. left_or_right_wall .. '\n'
   end
 
+  for _ = 1, #universe[1] do
+    top_or_bottom_boundary = top_or_bottom_boundary .. pillar .. top_or_bottom_wall
+  end
+  top_or_bottom_boundary = top_or_bottom_boundary .. pillar .. '\n'
+
   instance._private.output.print(
-    '*~*\n' ..
-    '|O|\n' ..
-    '*~*\n')
+    top_or_bottom_boundary ..
+    cells ..
+    top_or_bottom_boundary)
 end
 
 local function is_running()

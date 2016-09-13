@@ -43,13 +43,18 @@ describe('Conways game of life game factory', function()
     assert.is_true(game:is_running())
   end)
 
+  it('should call print once', function()
+    universe_mock.get_state.on_call_with(universe_mock).returns({ { O } })
+    game:render()
+    assert.stub(output_mock.print).was.called(1)
+  end)
+
   -- I don't think that this guy should actually be drawing. This should probably go to a
   -- UI or drawer object so the way the game is drawn can be switched out quickly.
   -- For now, I think I'll just make a goofy CLI UI
   it('should print a dead cell', function()
     universe_mock.get_state.on_call_with(universe_mock).returns({ { O } })
     game:render()
-    assert.stub(output_mock.print).was.called(1)
     assert.stub(output_mock.print).was.called_with(
       '*~*\n' ..
       '|O|\n' ..
@@ -59,10 +64,25 @@ describe('Conways game of life game factory', function()
   it('should print a living cell', function()
     universe_mock.get_state.on_call_with(universe_mock).returns({ { X } })
     game:render()
-    assert.stub(output_mock.print).was.called(1)
     assert.stub(output_mock.print).was.called_with(
       '*~*\n' ..
       '|X|\n' ..
       '*~*\n')
+  end)
+
+  it('should print several living and dead cells', function()
+    universe_mock.get_state.on_call_with(universe_mock).returns(
+      {
+        { X, O, O },
+        { O, X, O },
+        { X, X, O }
+      })
+    game:render()
+    assert.stub(output_mock.print).was.called_with(
+      '*~*~*~*\n' ..
+      '|X|O|O|\n' ..
+      '|O|X|O|\n' ..
+      '|X|X|O|\n' ..
+      '*~*~*~*\n')
   end)
 end)
