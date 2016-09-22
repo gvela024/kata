@@ -12,18 +12,19 @@ describe('Conways game of life game factory', function()
   }
   local universe_mock = {}
   local game = {}
-  local output = {
-    print = function() return nil end
+  local drawing_mechanism_mock = {}
+  local drawing_mechanism = {
+    draw = function() return nil end
   }
 
   before_each(function()
     universe_mock = mock(Universe(dummy_grid), true)
-    output_mock = mock(output, true)
-    game = Game(universe_mock, output_mock)
+    drawing_mechanism_mock = mock(drawing_mechanism, true)
+    game = Game(universe_mock, drawing_mechanism_mock)
   end)
 
   after_each(function()
-    mock.revert(output_mock)
+    mock.revert(drawing_mechanism_mock)
   end)
 
   it('should invoke the universe updated when game is updated', function()
@@ -33,56 +34,19 @@ describe('Conways game of life game factory', function()
   end)
 
   it('should call get_state when game is rendered', function()
-    universe_mock.get_state.on_call_with(universe_mock).returns({ { O } })
     game:render()
     assert.stub(universe_mock.get_state).was.called(1)
-    assert.stub(universe_mock.get_state).was.called_with(universe_mock)
   end)
 
   it('should, for now, always be running', function()
     assert.is_true(game:is_running())
   end)
 
-  it('should call print once', function()
-    universe_mock.get_state.on_call_with(universe_mock).returns({ { O } })
+  it('should call the drawing mechanisms draw function with the universe when rendering', function()
+    local universe = 'meh'
+    universe_mock.get_state.on_call_with(universe_mock).returns(universe)
     game:render()
-    assert.stub(output_mock.print).was.called(1)
-  end)
-
-  -- I don't think that this guy should actually be drawing. This should probably go to a
-  -- UI or drawer object so the way the game is drawn can be switched out quickly.
-  -- For now, I think I'll just make a goofy CLI UI
-  it('should print a dead cell', function()
-    universe_mock.get_state.on_call_with(universe_mock).returns({ { O } })
-    game:render()
-    assert.stub(output_mock.print).was.called_with(
-      '*~*\n' ..
-      '|O|\n' ..
-      '*~*\n')
-  end)
-
-  it('should print a living cell', function()
-    universe_mock.get_state.on_call_with(universe_mock).returns({ { X } })
-    game:render()
-    assert.stub(output_mock.print).was.called_with(
-      '*~*\n' ..
-      '|X|\n' ..
-      '*~*\n')
-  end)
-
-  it('should print several living and dead cells', function()
-    universe_mock.get_state.on_call_with(universe_mock).returns(
-      {
-        { X, O, O },
-        { O, X, O },
-        { X, X, O }
-      })
-    game:render()
-    assert.stub(output_mock.print).was.called_with(
-      '*~*~*~*\n' ..
-      '|X|O|O|\n' ..
-      '|O|X|O|\n' ..
-      '|X|X|O|\n' ..
-      '*~*~*~*\n')
+    assert.stub(drawing_mechanism_mock.draw).was.called(1)
+    assert.stub(drawing_mechanism_mock.draw).was.called_with(drawing_mechanism_mock, universe)
   end)
 end)
