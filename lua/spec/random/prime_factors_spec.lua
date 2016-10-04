@@ -3,7 +3,7 @@ Source: http://www.codekatas.org/casts/prime-factors-code-kata-by-lets-developer
 Tests for the prime factors class
 --]]
 
-local prime_factors = require 'src/prime_factors'
+local prime_factors = require 'src/random/prime_factors'
 
 describe('Prime factors', function()
   it('one should have no prime factors', function()

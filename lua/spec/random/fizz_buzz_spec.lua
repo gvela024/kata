@@ -2,7 +2,7 @@
 Tests for the fizz buzz module
 --]]
 
-local fizz_buzz = require 'src/fizz_buzz'
+local fizz_buzz = require 'src/random/fizz_buzz'
 
 describe('fizz buzz', function()
   it('should return number if number is not divisible by 3 or 5', function()
