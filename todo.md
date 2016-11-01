@@ -18,3 +18,8 @@
 ### Random Stuff
 - Finding Peaks in a signal
 - Filtering small peaks from extreme peaks
+
+## Drivers
+- I2C
+- UART
+- SPI
