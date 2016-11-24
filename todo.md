@@ -18,3 +18,4 @@
 ### Random Stuff
 - Finding Peaks in a signal
 - Filtering small peaks from extreme peaks
+- Fibonacci sequence - memoization
