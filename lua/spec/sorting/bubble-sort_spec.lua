@@ -52,19 +52,23 @@ end procedure
 ]]
 
 describe('Bubble sort', function()
-  local BubbleSort = require 'src/sorting/bubble-sort'
+  local bubble_sort = require 'src/sorting/bubble-sort'
 
   it('should sort two numbers in ascending order', function()
-    assert.are.same({1, 2}, BubbleSort.ascending({2, 1}))
+    assert.are.same({ 1, 2 }, bubble_sort.ascending({ 2, 1 }))
   end)
 
-  it('should sort a set of numbers in ascending order', function()
-    assert.are.same({-3, -3, -2.2, 0, 4, 4.9, 4.9, 7, 10}, BubbleSort.ascending({10, 4.9, -3, 4, 0, -2.2, 4.9, 7, -3}))
+  it('should sort three numbers in ascending order', function()
+    assert.are.same({ 1, -1, 2 }, bubble_sort.ascending({ 2, 1 }))
   end)
 
-  it('should not modify the original set', function()
-    local actual = {4, 2, 3, 1}
-    BubbleSort.ascending(actual)
-      assert.are.same({4, 2, 3, 1}, actual)
-  end)
+  -- it('should sort a set of numbers in ascending order', function()
+  --   assert.are.same({-3, -3, -2.2, 0, 4, 4.9, 4.9, 7, 10}, bubble_sort.ascending({10, 4.9, -3, 4, 0, -2.2, 4.9, 7, -3}))
+  -- end)
+  --
+  -- it('should not modify the original set', function()
+  --   local actual = {4, 2, 3, 1}
+  --   bubble_sort.ascending(actual)
+  --     assert.are.same({4, 2, 3, 1}, actual)
+  -- end)
 end)
