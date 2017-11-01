@@ -66,9 +66,9 @@ describe('Bubble sort', function()
     assert.are.same({-3, -3, -2.2, 0, 4, 4.9, 4.9, 7, 10}, bubble_sort.ascending({10, 4.9, -3, 4, 0, -2.2, 4.9, 7, -3}))
   end)
 
-  -- it('should not modify the original set', function()
-  --   local actual = {4, 2, 3, 1}
-  --   bubble_sort.ascending(actual)
-  --     assert.are.same({4, 2, 3, 1}, actual)
-  -- end)
+  it('should not modify the original set', function()
+    local actual = {4, 2, 3, 1}
+    bubble_sort.ascending(actual)
+      assert.are.same({4, 2, 3, 1}, actual)
+  end)
 end)
