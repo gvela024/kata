@@ -14,8 +14,14 @@
 - Heap Sort
 - Merge Sort
 - Quick Sort
+- Bucket Sort
 
 ### Random Stuff
 - Finding Peaks in a signal
 - Filtering small peaks from extreme peaks
 - Fibonacci sequence - memoization
+
+## Drivers
+- I2C
+- UART
+- SPI
