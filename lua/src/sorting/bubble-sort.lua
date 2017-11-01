@@ -9,14 +9,13 @@ end
 local function ascending(set)
   local copy = make_copy(set)
 
-  local previous = nil
-  for k, v in ipairs(set) do
-    if previous and previous > v then
-      local temp = copy[k - 1]
-      copy[k - 1] = v
-      copy[k] = temp
-    else
-      previous = v
+  for k in ipairs(set) do
+    for w, v in ipairs(copy) do
+      if w > 1 and copy[w - 1] > copy[w] then
+        local temp = copy[w - 1]
+        copy[w - 1] = copy[w]
+        copy[w] = temp
+      end
     end
   end
 

@@ -59,7 +59,7 @@ describe('Bubble sort', function()
   end)
 
   it('should sort three numbers in ascending order', function()
-    assert.are.same({ 1, -1, 2 }, bubble_sort.ascending({ 2, 1 }))
+    assert.are.same({ -1, 1, 2 }, bubble_sort.ascending({ 1, -1, 2 }))
   end)
 
   -- it('should sort a set of numbers in ascending order', function()
