@@ -5,6 +5,7 @@
 - Flyweight
 - Observer
 - Prototype
+- Actor-Model
 
 ## Algorithms
 ### Sorting Algorithms
