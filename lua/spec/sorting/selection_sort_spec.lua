@@ -25,9 +25,9 @@ describe('bubble sort', function()
     assert.are.same({ 1, 2 }, selection_sort.ascending({ 2, 1 }))
   end)
 
-  -- it('should sort three numbers in ascending order', function()
-  --   assert.are.same({ -1, 1, 2 }, selection_sort.ascending({ 1, -1, 2 }))
-  -- end)
+  it('should sort three numbers in ascending order', function()
+    assert.are.same({ -1, 1, 2 }, selection_sort.ascending({ 1, -1, 2 }))
+  end)
   --
   -- it('should sort a set of numbers in ascending order', function()
   --   assert.are.same({ -3, -3, -2.2, 0, 4, 4.9, 4.9, 7, 10 }, selection_sort.ascending({ 10, 4.9, -3, 4, 0, -2.2, 4.9, 7, -3 }))
