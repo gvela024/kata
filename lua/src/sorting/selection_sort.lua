@@ -6,7 +6,7 @@ local function copySet(set)
   return copy
 end
 
-local function ascending(set)
+local function selection_sort(set, order)
   local set_copy = copySet(set)
   local ordered = {}
 
@@ -20,12 +20,25 @@ local function ascending(set)
     end
 
     table.remove(set_copy, key)
-    table.insert(ordered, smallest)
+    if order then
+      table.insert(ordered, order, smallest)
+    else
+      table.insert(ordered, smallest)
+    end
   end
 
   return ordered
 end
 
+local function ascending(set)
+  return selection_sort(set)
+end
+
+local function descending(set)
+  return selection_sort(set, 1)
+end
+
 return {
-  ascending = ascending
+  ascending = ascending,
+  descending = descending
 }
