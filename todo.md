@@ -20,6 +20,7 @@
 - [ ] Finding Peaks in a signal
 - [ ] Filtering small peaks from extreme peaks
 - [ ] Fibonacci sequence - memoization
+- [ ] rot13
 
 ## Drivers
 - [ ] I2C
