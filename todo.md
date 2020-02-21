@@ -15,6 +15,8 @@
 - [ ] Merge Sort
 - [ ] Quick Sort
 - [ ] Bucket Sort
+- [ ] min-heap
+- [ ] max-heap
 
 ### Random Stuff
 - [ ] Finding Peaks in a signal
