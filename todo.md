@@ -13,7 +13,7 @@
 - [x] Selection Sort
 - [x] Insertion Sort
 - [x] Merge Sort
-- [ ] Quick Sort
+- [x] Quick Sort
 - [ ] Bucket Sort
 - [ ] min-heap
 - [ ] max-heap
@@ -23,6 +23,7 @@
 - [ ] Filtering small peaks from extreme peaks
 - [ ] Fibonacci sequence - memoization
 - [ ] rot13
+- [ ] Create a bunch of number sets for all the sorting algorithm tests
 
 ## Drivers
 - [ ] I2C

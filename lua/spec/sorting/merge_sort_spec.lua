@@ -7,7 +7,7 @@ sublist remaining. This will be the sorted list.
 ]]
 
 describe('merge sort', function()
-  local merge_sort = require 'src/sorting/merge_sort'
+  local merge_sort = require 'src.sorting.merge_sort'
 
   it('should not modify the original object', function()
     local obj = { 3, 1, 5 }
@@ -32,7 +32,7 @@ describe('merge sort', function()
   end)
 
   it('should sort a set of numbers in ascending order', function()
-    assert.are.same({ -3, -2, 0, 4, 5 }, merge_sort.ascending({ 4, -3, 0, -2, 5}))
+    assert.are.same({ -3, -2, 0, 0, 4 }, merge_sort.ascending({ 4, -3, 0, -2, 0}))
   end)
 
   it('should sort a larger set of numbers in ascending order', function()

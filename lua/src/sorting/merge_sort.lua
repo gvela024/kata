@@ -1,10 +1,4 @@
-local function copySet(set)
-  local copy = {}
-  for _, v in pairs(set) do
-    table.insert(copy, v)
-  end
-  return copy
-end
+local copy_set = require 'src.sorting.copy_set'
 
 local function make_subset(set, start, _end)
   local subset = {}
@@ -71,7 +65,7 @@ local function ascending(_set)
       return _set
     end
   else
-    local set = copySet(_set)
+    local set = copy_set(_set)
     merge_sort(set, 1, #set, 0, 'start')
     return set
   end
