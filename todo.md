@@ -1,5 +1,4 @@
-# Kata's to learn
-
+# Katas
 ## Design Patterns
 - [ ] Command
 - [ ] Flyweight
@@ -14,7 +13,8 @@
 - [x] Insertion Sort
 - [x] Merge Sort
 - [x] Quick Sort
-- [ ] Bucket Sort
+- [x] Bucket Sort - sort of
+- [ ] Counting Sort
 - [ ] min-heap
 - [ ] max-heap
 
