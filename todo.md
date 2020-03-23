@@ -8,6 +8,7 @@
 
 ## Algorithms
 ### Sorting Algorithms
+- [ ] Write up some notes on each
 - [x] Bubble Sort
 - [x] Selection Sort
 - [x] Insertion Sort
