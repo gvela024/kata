@@ -15,7 +15,7 @@
 - [x] Merge Sort
 - [x] Quick Sort
 - [x] Bucket Sort - sort of
-- [ ] Counting Sort
+- [x] Counting Sort
 - [ ] min-heap
 - [ ] max-heap
 
