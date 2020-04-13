@@ -12,7 +12,8 @@ Uses for min heap
 - Sort an almost sorted array
 - Merge K sorted arrays
 
-using this guy to create validation data: https://www.cs.usfca.edu/~galles/visualization/Heap.html
+https://www.cs.usfca.edu/~galles/visualization/Heap.html
+https://visualgo.net/en/heap
 ]]
 
 describe('min heap', function()
