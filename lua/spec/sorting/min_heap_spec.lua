@@ -49,12 +49,12 @@ describe('min heap', function()
 
   it('should remove minimum', function()
     local min_heap = min_heap()
-    min_heap.insert({ 3, 4, 6, 12, 33, 55, 40, 9, 35, 66, 67, 45 })
+    min_heap.insert({ 3, 9, 4, 12, 33, 6, 40, 55, 35, 66, 67, 45 })
 
-    assert.are.same({ 3, 4, 6, 9, 33, 45, 40, 12, 35, 66, 67, 55 }, min_heap.tree)
     assert.are.equal(3, min_heap.get_minimum())
+    assert.are.same({ 4, 9, 6, 12, 33, 45, 40, 55, 35, 66, 67 }, min_heap.tree)
 
-    assert.are.same({ 3, 4, 6, 9, 33, 45, 40, 12, 35, 66, 67, 55 }, min_heap.tree)
     assert.are.equal(4, min_heap.get_minimum())
+    assert.are.same({ 6, 9, 40, 12, 33, 45, 67, 55, 35, 66 }, min_heap.tree)
   end)
 end)

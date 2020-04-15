@@ -16,7 +16,7 @@
 - [x] Quick Sort
 - [x] Bucket Sort - sort of
 - [x] Counting Sort
-- [ ] min-heap
+- [x] min-heap
 - [ ] max-heap
 
 ### Random Stuff
