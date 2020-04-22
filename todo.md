@@ -17,14 +17,13 @@
 - [x] Bucket Sort - sort of
 - [x] Counting Sort
 - [x] min-heap
-- [ ] max-heap
+- [x] max-heap
 
 ### Random Stuff
 - [ ] Finding Peaks in a signal
 - [ ] Filtering small peaks from extreme peaks
 - [ ] Fibonacci sequence - memoization
 - [ ] rot13
-- [ ] Create a bunch of number sets for all the sorting algorithm tests
 
 ## Drivers
 - [ ] I2C
@@ -38,4 +37,4 @@
 - [ ] OSI Communication Stack
 
 ## Other Stuff
-- [ ] [Presoner's Dilema](https://en.wikipedia.org/wiki/Prisoner%27s_dilemma)
+- [ ] [Prisoner's Dilemma](https://en.wikipedia.org/wiki/Prisoner%27s_dilemma)
