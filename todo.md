@@ -32,6 +32,7 @@
 
 ## Compression
 - [ ] Huffman
+- [ ] [Delta](https://en.wikipedia.org/wiki/Delta_encoding)
 
 ## Communication
 - [ ] OSI Communication Stack
