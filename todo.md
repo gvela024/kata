@@ -30,6 +30,9 @@
 - [ ] UART
 - [ ] SPI
 
+## Hardware Simulations
+- [ ] Successive approximation ADC
+
 ## Compression
 - [ ] Huffman
 - [ ] [Delta](https://en.wikipedia.org/wiki/Delta_encoding)
