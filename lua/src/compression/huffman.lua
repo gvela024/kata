@@ -52,8 +52,8 @@ return function(text)
   local huffman_codes = {}
 
   build_unordered_map(text, unordered_map)
-  build_priority_queue(unordered_map, priority_queue)
-  build_huffman_codes(priority_queue, 1, '', huffman_codes)
+  -- build_priority_queue(unordered_map, priority_queue) This is wrong, need to make a queue where each node is the sum of the frequencies.
+  -- build_huffman_codes(priority_queue, 1, '', huffman_codes)
 
   return {
     codes = codes,
