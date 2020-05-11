@@ -26,7 +26,7 @@ return function()
       end
     end,
 
-    get_minimum = function()
+    get_minimum = function() -- this is actually way more complicated than it needs to be and probably doesn't work on #tree < 4
       local minimum = tree[1]
       local last_value = tree[#tree]
       local last_index = 1

@@ -6,11 +6,11 @@ https://people.ok.ubc.ca/ylucet/DS/Huffman.html
 describe('huffman', function()
   local Huffman = require 'src.compression.huffman'
 
-  -- it('should create unordered map', function()
-  --   local huffman = Huffman('aaabbc')
+  it('should create unordered map', function()
+    local huffman = Huffman('aaabbc')
 
-  --   assert.are.same({ a = 3, b = 2, c = 1 }, huffman.unordered_map)
-  -- end)
+    assert.are.same({ a = 3, b = 2, c = 1 }, huffman.unordered_map)
+  end)
 
   -- it('should create a priority queue', function()
     -- local huffman = Huffman('aaabbc')
@@ -41,18 +41,18 @@ describe('huffman', function()
         huffman.tree)
     end)
 
-  -- it('should create the huffman codes', function()
-  --   local huffman = Huffman('aaabbc')
+  it('should create the huffman codes', function()
+    local huffman = Huffman('aaabbc')
 
-  --   assert.are.same(
-  --     {
-  --       b = '11',
-  --       a = '0',
-  --       c = '10'
-  --     },
-  --     huffman.huffman_codes
-  --   )
-  -- end)
+    assert.are.same(
+      {
+        b = '11',
+        a = '0',
+        c = '10'
+      },
+      huffman.codes
+    )
+  end)
 
   -- it('should encode characters', function()
   --   local huffman = Huffman("aaabbc")
