@@ -64,33 +64,43 @@ local function get_minimum(tree)
 end
 
 local function build_huffman_tree(priority_queue, huffman_tree)
-  local priority_queue_copy = make_copy(priority_queue)
-  local minimum_1 = get_minimum(priority_queue_copy)
-  local minimum_2 = get_minimum(priority_queue_copy)
-  table.insert(huffman_tree, 1, minimum_1)
-  table.insert(huffman_tree, 1, minimum_2)
-  table.insert(huffman_tree, 1, { frequency = minimum_1.frequency + minimum_2.frequency })
-
+  local huffman_tree = make_copy(priority_queue)
   while #priority_queue_copy > 1 do
-    minimum_1 = get_minimum(priority_queue_copy)
-    minimum_2 = get_minimum(priority_queue_copy)
-    table.insert(huffman_tree, 1, minimum_1)
-    table.insert(huffman_tree, 1, minimum_2)
-    table.insert(huffman_tree, 1, { frequency = minimum_1.frequency + minimum_2.frequency })
-    for k, v in pairs(huffman_tree) do print(k, v.frequency, v.character) end
-  end
+    local minimum_1 = get_minimum(priority_queue_copy)
+    local minimum_2 = get_minimum(priority_queue_copy)
 
-  local root = huffman_tree[1]
-  local minimum = get_minimum(priority_queue_copy)
-  table.insert(huffman_tree, 1, minimum)
-  table.insert(huffman_tree, 1, { frequency = root.frequency + minimum.frequency })
+    huffman_tree[1] = { frequency}
+  end
+  -- table.insert(huffman_tree, 1, minimum_1)
+  -- table.insert(huffman_tree, 1, minimum_2)
+  -- table.insert(huffman_tree, 1, { frequency = minimum_1.frequency + minimum_2.frequency })
+
+  -- while #priority_queue_copy > 1 do
+  --   minimum_1 = get_minimum(priority_queue_copy)
+  --   minimum_2 = get_minimum(priority_queue_copy)
+  --   table.insert(huffman_tree, 1, minimum_1)
+  --   table.insert(huffman_tree, 1, minimum_2)
+  --   table.insert(huffman_tree, 1, { frequency = minimum_1.frequency + minimum_2.frequency })
+  --   for k, v in pairs(huffman_tree) do print(k, v.frequency, v.character) end
+  -- end
+
+  -- local root = huffman_tree[1]
+  -- local minimum = get_minimum(priority_queue_copy)
+  -- table.insert(huffman_tree, 1, minimum)
+  -- table.insert(huffman_tree, 1, { frequency = root.frequency + minimum.frequency })
 end
 
 local function build_huffman_codes(huffman_tree, node_index, code, huffman_codes)
+  print()
+  print('node index', node_index)
+  print('code', code)
+  print('size of tree', #huffman_tree)
   if node_index > #huffman_tree then return end
 
   local left_child_value, left_child_index = heap_utilities.get_left_child(node_index, huffman_tree)
   local right_child_value, right_child_index = heap_utilities.get_right_child(node_index, huffman_tree)
+  print('left child', left_child_value, left_child_index)
+  print('right child', right_child_value, right_child_index)
 
   if left_child_value == nil and right_child_value == nil then huffman_codes[huffman_tree[node_index].character] = code end
 
