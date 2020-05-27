@@ -6,14 +6,14 @@ https://people.ok.ubc.ca/ylucet/DS/Huffman.html
 describe('huffman', function()
   local Huffman = require 'src.compression.huffman'
 
-  -- it('should create unordered map', function()
-  --   local huffman = Huffman('aaabbc')
+  it('should create unordered map', function()
+    local huffman = Huffman('aaabbc')
 
-  --   assert.are.same({ a = 3, b = 2, c = 1 }, huffman.unordered_map)
-  -- end)
+    assert.are.same({ a = 3, b = 2, c = 1 }, huffman.unordered_map)
+  end)
 
-  -- it('should create a priority queue', function()
-    -- local huffman = Huffman('aaabbc')
+  it('should create a priority queue', function()
+    local huffman = Huffman('aaabbc')
 
     -- choosing not to test this guy since the order
     -- in which the unordered tree is parsed isn't guaranteed...
@@ -25,7 +25,7 @@ describe('huffman', function()
     --     { character = 'b', frequency = 2 }
     --   },
     --   huffman.priority_queue)
-  -- end)
+  end)
 
     it('should create a huffman tree', function()
       local huffman = Huffman('aaabbc')
@@ -34,12 +34,12 @@ describe('huffman', function()
         {
           {
             frequency = 6,
-            right = {
+            left = {
               frequency = 3,
               right = { character = 'c', frequency = 1 },
               left = { character = 'b', frequency = 2 }
             },
-            left = { character = 'a', frequency = 3 }
+            right = { character = 'a', frequency = 3 }
           },
         },
         huffman.tree)

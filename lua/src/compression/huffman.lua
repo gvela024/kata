@@ -10,19 +10,23 @@ local function build_unordered_map(text, unordered_map)
   end
 end
 
-local function build_max_heap_priority_queue(unordered_map, priority_queue)
+local function min_heap_insert(tree, node)
+  table.insert(tree, node)
+  local parent_index = math.floor(#tree / 2)
+  local node_index = #tree
+  while parent_index > 0 and tree[parent_index].frequency > node.frequency do
+    local parent_value = tree[parent_index]
+    tree[parent_index] = node
+    tree[node_index] = parent_value
+    node_index = parent_index
+    parent_index = math.floor(node_index / 2)
+  end
+end
+
+local function build_min_heap_priority_queue(unordered_map, priority_queue)
   for character, frequency in pairs(unordered_map) do
-    local node_value = { character = character, frequency = frequency }
-    table.insert(priority_queue, node_value)
-    local parent_index = math.floor(#priority_queue / 2)
-    local node_index = #priority_queue
-    while parent_index > 0 and priority_queue[parent_index].frequency > frequency do
-      local parent_value = priority_queue[parent_index]
-      priority_queue[parent_index] = node_value
-      priority_queue[node_index] = parent_value
-      node_index = parent_index
-      parent_index = math.floor(node_index / 2)
-    end
+    local node = { character = character, frequency = frequency }
+    min_heap_insert(priority_queue, node)
   end
 end
 
@@ -63,31 +67,20 @@ local function get_minimum(tree)
   return minimum
 end
 
-local function build_huffman_tree(priority_queue, huffman_tree)
+local function build_huffman_tree(priority_queue)
   local huffman_tree = make_copy(priority_queue)
-  while #priority_queue_copy > 1 do
-    local minimum_1 = get_minimum(priority_queue_copy)
-    local minimum_2 = get_minimum(priority_queue_copy)
+  while #huffman_tree > 1 do
+    local minimum_1 = get_minimum(huffman_tree)
+    local minimum_2 = get_minimum(huffman_tree)
 
-    huffman_tree[1] = { frequency}
+    local node = {
+      frequency = minimum_1.frequency + minimum_2.frequency,
+      right = minimum_1,
+      left = minimum_2
+    }
+    min_heap_insert(huffman_tree, node)
   end
-  -- table.insert(huffman_tree, 1, minimum_1)
-  -- table.insert(huffman_tree, 1, minimum_2)
-  -- table.insert(huffman_tree, 1, { frequency = minimum_1.frequency + minimum_2.frequency })
-
-  -- while #priority_queue_copy > 1 do
-  --   minimum_1 = get_minimum(priority_queue_copy)
-  --   minimum_2 = get_minimum(priority_queue_copy)
-  --   table.insert(huffman_tree, 1, minimum_1)
-  --   table.insert(huffman_tree, 1, minimum_2)
-  --   table.insert(huffman_tree, 1, { frequency = minimum_1.frequency + minimum_2.frequency })
-  --   for k, v in pairs(huffman_tree) do print(k, v.frequency, v.character) end
-  -- end
-
-  -- local root = huffman_tree[1]
-  -- local minimum = get_minimum(priority_queue_copy)
-  -- table.insert(huffman_tree, 1, minimum)
-  -- table.insert(huffman_tree, 1, { frequency = root.frequency + minimum.frequency })
+  return huffman_tree
 end
 
 local function build_huffman_codes(huffman_tree, node_index, code, huffman_codes)
@@ -115,8 +108,8 @@ return function(text)
   local huffman_codes = {}
 
   build_unordered_map(text, unordered_map)
-  build_max_heap_priority_queue(unordered_map, priority_queue)
-  build_huffman_tree(priority_queue, huffman_tree)
+  build_min_heap_priority_queue(unordered_map, priority_queue)
+  huffman_tree = build_huffman_tree(priority_queue)
   -- build_huffman_codes(huffman_tree, 1, '', huffman_codes)
 
   return {
