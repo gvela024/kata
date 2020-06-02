@@ -30,12 +30,8 @@ local function build_min_heap_priority_queue(unordered_map, priority_queue)
   end
 end
 
-local function make_copy(set)
-  local copy = {}
-  for k in ipairs(set) do
-    table.insert(copy, set[k])
-  end
-  return copy
+local function make_copy(source, destination)
+  for k, v in ipairs(source) do table.insert(destination, k, v) end
 end
 
 local function swap(i1, i2, tree)
@@ -48,6 +44,7 @@ local function get_minimum(tree)
   minimum = tree[1]
   tree[1] = tree[#tree]
   tree[#tree] = nil
+  -- table.remove(tree)
   local sorting_index = 1
   while sorting_index < #tree do
     local left_value, left_index = heap_utilities.get_left_child(sorting_index, tree)
@@ -67,8 +64,9 @@ local function get_minimum(tree)
   return minimum
 end
 
-local function build_huffman_tree(priority_queue)
-  local huffman_tree = make_copy(priority_queue)
+local function build_huffman_tree(priority_queue, huffman_tree)
+  make_copy(priority_queue, huffman_tree)
+
   while #huffman_tree > 1 do
     local minimum_1 = get_minimum(huffman_tree)
     local minimum_2 = get_minimum(huffman_tree)
@@ -80,42 +78,45 @@ local function build_huffman_tree(priority_queue)
     }
     min_heap_insert(huffman_tree, node)
   end
-  return huffman_tree
 end
 
-local function build_huffman_codes(huffman_tree, node_index, code, huffman_codes)
-  print()
-  print('node index', node_index)
-  print('code', code)
-  print('size of tree', #huffman_tree)
-  if node_index > #huffman_tree then return end
+local function build_huffman_codes(huffman_tree, code, huffman_codes)
+  -- print()
+  -- print('code', code)
+  if huffman_tree == nil then
+    -- print()
+    -- for k, v in pairs(huffman_codes) do print (k, v) end
+    return
+  end
 
-  local left_child_value, left_child_index = heap_utilities.get_left_child(node_index, huffman_tree)
-  local right_child_value, right_child_index = heap_utilities.get_right_child(node_index, huffman_tree)
-  print('left child', left_child_value, left_child_index)
-  print('right child', right_child_value, right_child_index)
+  local left = huffman_tree.left
+  local right = huffman_tree.right
 
-  if left_child_value == nil and right_child_value == nil then huffman_codes[huffman_tree[node_index].character] = code end
+  if left == nil and right == nil then
+    huffman_codes[huffman_tree.character] = code
+  end
 
-  build_huffman_codes(huffman_tree, left_child_index, code .. '0', huffman_codes)
-  build_huffman_codes(huffman_tree, right_child_index, code .. '1', huffman_codes)
+  build_huffman_codes(left, code .. '0', huffman_codes)
+  build_huffman_codes(right, code .. '1', huffman_codes)
 end
 
-return function(text)
+return function()
   local unordered_map = {}
   local priority_queue = {}
   local huffman_tree = {}
   local huffman_codes = {}
 
-  build_unordered_map(text, unordered_map)
-  build_min_heap_priority_queue(unordered_map, priority_queue)
-  huffman_tree = build_huffman_tree(priority_queue)
-  -- build_huffman_codes(huffman_tree, 1, '', huffman_codes)
+  return function(text)
+    build_unordered_map(text, unordered_map)
+    build_min_heap_priority_queue(unordered_map, priority_queue)
+    build_huffman_tree(priority_queue, huffman_tree)
+    build_huffman_codes(huffman_tree[1], '', huffman_codes)
 
-  return {
-    unordered_map = unordered_map,
-    priority_queue = priority_queue,
-    tree = huffman_tree,
-    huffman_codes = huffman_codes
-  }
+    return {
+      unordered_map = unordered_map,
+      priority_queue = priority_queue,
+      tree = huffman_tree,
+      codes = huffman_codes
+    }
+end
 end

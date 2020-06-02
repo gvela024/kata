@@ -4,7 +4,11 @@ https://people.ok.ubc.ca/ylucet/DS/Huffman.html
 ]]
 
 describe('huffman', function()
-  local Huffman = require 'src.compression.huffman'
+  local Huffman
+
+  before_each(function()
+    Huffman = require 'src.compression.huffman'()
+  end)
 
   it('should create unordered map', function()
     local huffman = Huffman('aaabbc')
@@ -40,23 +44,23 @@ describe('huffman', function()
               left = { character = 'b', frequency = 2 }
             },
             right = { character = 'a', frequency = 3 }
-          },
+          }
         },
         huffman.tree)
     end)
 
-  -- it('should create the huffman codes', function()
-  --   local huffman = Huffman('aaabbc')
+  it('should create the huffman codes', function()
+    local huffman = Huffman('aaabbc')
 
-  --   assert.are.same(
-  --     {
-  --       b = '11',
-  --       a = '0',
-  --       c = '10'
-  --     },
-  --     huffman.codes
-  --   )
-  -- end)
+    assert.are.same(
+      {
+        b = '11',
+        a = '0',
+        c = '10'
+      },
+      huffman.codes
+    )
+  end)
 
   -- it('should encode characters', function()
   --   local huffman = Huffman("aaabbc")
