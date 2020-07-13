@@ -81,11 +81,7 @@ local function build_huffman_tree(priority_queue, huffman_tree)
 end
 
 local function build_huffman_codes(huffman_tree, code, huffman_codes)
-  -- print()
-  -- print('code', code)
   if huffman_tree == nil then
-    -- print()
-    -- for k, v in pairs(huffman_codes) do print (k, v) end
     return
   end
 
@@ -96,8 +92,44 @@ local function build_huffman_codes(huffman_tree, code, huffman_codes)
     huffman_codes[huffman_tree.character] = code
   end
 
-  build_huffman_codes(left, code .. '0', huffman_codes)
-  build_huffman_codes(right, code .. '1', huffman_codes)
+  build_huffman_codes(right, code .. '0', huffman_codes)
+  build_huffman_codes(left, code .. '1', huffman_codes)
+end
+
+local function encoded_string(huffman_codes, text)
+  local encoded_string = ''
+  for c in text:gmatch'.' do
+    encoded_string = encoded_string .. huffman_codes[c]
+  end
+  return encoded_string
+end
+
+local function decode(huffman_tree, encoded_text_array, decode_data)
+  if huffman_tree == nil then return end
+
+  if huffman_tree.left == nil and huffman_tree.right == nil then
+    table.insert(decode_data.string, huffman_tree.character)
+    return
+  end
+
+  decode_data.index = decode_data.index + 1
+
+  if encoded_text_array[decode_data.index] == '0' then decode(huffman_tree.right, encoded_text_array, decode_data)
+  else decode(huffman_tree.left, encoded_text_array, decode_data) end
+end
+
+local function decode_string(huffman_tree, text)
+  local encoded_text_array = {}
+  text:gsub('.', function(c) table.insert(encoded_text_array, c) end)
+
+  local decode_data = { }
+  decode_data.string = { }
+  decode_data.index = 0
+  while decode_data.index < #text do decode(huffman_tree, encoded_text_array, decode_data) end
+
+  local decoded_string = ''
+  for _, c in ipairs(decode_data.string) do decoded_string = decoded_string .. c end
+  return decoded_string
 end
 
 return function()
@@ -112,11 +144,16 @@ return function()
     build_huffman_tree(priority_queue, huffman_tree)
     build_huffman_codes(huffman_tree[1], '', huffman_codes)
 
+    local encoded_string = encoded_string(huffman_codes, text)
+    local decoded_string = decode_string(huffman_tree[1], encoded_string)
+
     return {
       unordered_map = unordered_map,
       priority_queue = priority_queue,
       tree = huffman_tree,
-      codes = huffman_codes
+      codes = huffman_codes,
+      encoded_string = encoded_string,
+      decoded_string = decoded_string
     }
 end
 end

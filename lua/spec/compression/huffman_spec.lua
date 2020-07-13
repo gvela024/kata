@@ -31,23 +31,23 @@ describe('huffman', function()
     --   huffman.priority_queue)
   end)
 
-    it('should create a huffman tree', function()
-      local huffman = Huffman('aaabbc')
+  it('should create a huffman tree', function()
+    local huffman = Huffman('aaabbc')
 
-      assert.are.same(
+    assert.are.same(
+      {
         {
-          {
-            frequency = 6,
-            left = {
-              frequency = 3,
-              right = { character = 'c', frequency = 1 },
-              left = { character = 'b', frequency = 2 }
-            },
-            right = { character = 'a', frequency = 3 }
-          }
-        },
-        huffman.tree)
-    end)
+          frequency = 6,
+          left = {
+            frequency = 3,
+            right = { character = 'c', frequency = 1 },
+            left = { character = 'b', frequency = 2 }
+          },
+          right = { character = 'a', frequency = 3 }
+        }
+      },
+      huffman.tree)
+  end)
 
   it('should create the huffman codes', function()
     local huffman = Huffman('aaabbc')
@@ -62,15 +62,13 @@ describe('huffman', function()
     )
   end)
 
-  -- it('should encode characters', function()
-  --   local huffman = Huffman("aaabbc")
-  --   assert.are.same(
-  --     {
-  --       b = '11',
-  --       a = '0',
-  --       c = '10'
-  --     },
-  --     huffman.codes
-  --   )
-  -- end)
+  it('should create encoded string', function()
+    local huffman = Huffman('aaabbc')
+    assert.are.same('000111110', huffman.encoded_string)
+  end)
+
+  it('should decode the encoded string', function()
+    local huffman = Huffman('aaabbc')
+    assert.are.same('aaabbc', huffman.decoded_string)
+  end)
 end)
